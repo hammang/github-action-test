@@ -36,3 +36,13 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t ${{ secrets.DOCKER_REPO }}/ci-test ./
         docker push ${{ secrets.DOCKER_REPO }}/ci-test
+
+    - name: Beanstalk Deploy
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: cicd
+          environment_name: Cicd-env
+          region: ap-northeast-2
+          deployment_package: Dockerrun.aws.json
