@@ -36,6 +36,18 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t ${{ secrets.DOCKER_REPO }}/ci-test ./
         docker push ${{ secrets.DOCKER_REPO }}/ci-test
+    - name: Get timestamp
+      uses: gerred/actions/current-time@master
+      id: current-time
+
+    - name: Run string replace
+      uses: frabert/replace-string-action@master
+      id: format-time
+      with:
+        pattern: '[:\.]+'
+        string: "${{ steps.current-time.outputs.time }}"
+        replace-with: '-'
+        flags: 'g'
 
     - name: Beanstalk Deploy
       uses: einaregilsson/beanstalk-deploy@v20
@@ -44,5 +56,6 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: cicd
         environment_name: Cicd-env
+        version_label: "github-action--${{ steps.format-time.outputs.replaced }}"
         region: ap-northeast-2
         deployment_package: Dockerrun.aws.json
