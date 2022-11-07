@@ -10,6 +10,6 @@ public class HelloWorldController {
     @GetMapping("/hello")
     public ResponseEntity<ResponseMessage> sayHello() {
 
-        return ResponseEntity.ok().body(new ResponseMessage("hello world!"));
+        return ResponseEntity.ok().body(new ResponseMessage("hello world!", "say hello method"));
     }
 }

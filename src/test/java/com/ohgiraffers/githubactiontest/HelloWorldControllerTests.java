@@ -25,6 +25,8 @@ public class HelloWorldControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.text").exists())
                 .andExpect(jsonPath("$.text").value("hello world!"))
+                .andExpect(jsonPath("$.description").exists())
+                .andExpect(jsonPath("$.description").value("say hello method"))
                 .andDo(print());
     }
 }
