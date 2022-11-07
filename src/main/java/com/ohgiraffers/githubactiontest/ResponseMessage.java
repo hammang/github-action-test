@@ -3,18 +3,18 @@ package com.ohgiraffers.githubactiontest;
 public class ResponseMessage {
 
     private String text;
-    private String desciption;
+//    private String desciption;
 
-    public ResponseMessage(String text, String description) {
+    public ResponseMessage(String text/*, String description*/) {
         this.text = text;
-        this.desciption = description;
+//        this.desciption = description;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getDesciption() {
-        return desciption;
-    }
+//    public String getDesciption() {
+//        return desciption;
+//    }
 }
