@@ -8,6 +8,14 @@ group = 'com.ohgiraffers'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+sourceSets {
+    main {
+        java {
+            exclude "**/workflows/**"
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -16,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'com.amazonaws', name: 'aws-xray-recorder-sdk-core', version: '2.12.0'
+
 }
 
 tasks.named('test') {
